@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="form">
+        <img src="./image/form.png" alt="substr 与 substring ，splice的区别">
+    </div>
+    <script>
+        // 8、substr 与 substring ，splice的区别
+        // (1) splice()数组的方法 用于添加或删除数组中的元素。返回值是删除的元素。改变了原数组
+        // 第一个参数是删除的起始下标，必需。第二个参数是要删除的个数，必需。第三个参数是要添加的 新元素，可选
+        var arr = [1, 2, 3, 4, 5];
+        var arr1 = arr.splice(1, 4);
+        console.log(arr); // [1]   
+        console.log(arr1); // [2,3,4,5]  
+
+        // (2) substr()字符串的方法 截取字符串，第一个参数是起始下标，可以是负数（从后到前），必需。
+        // 第二个参数要删除的长度，可选 .返回值是截取掉的字符串，原始字符串不变
+        var str = "abcdefg";
+        var strN = str.substr(1,3);
+        console.log(str);  //"abcdefg"
+        console.log(strN);  //"bcd"
+        // (3) substring()字符串的方法，第一个参数：起始下标，不能为负，必需。
+        // 第二个参数：结束的位置下标，不能为负，取不到，可选。原始字符串不变
+        var str1 = str.substring(1,3);
+        var str2 = str.substring(1);
+        console.log(str1); //bc
+        console.log(str); //abcdefg
+        console.log(str2); //bcdefg
+
+    </script>
+</body>
+
+</html>

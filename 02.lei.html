@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+    
+    
+    var caluses = [
+        {
+            caluseName: '12',
+            coverage: [
+                {
+                    coverageName: 'coverage1',
+                    item: [
+                        {itenName: 'item1'},
+                        {itenName: 'item2'},
+                        {itenName: 'item3'}
+                    ]
+                },
+                {
+                    coverageName: 'coverage1',
+                    item: [
+                        {itenName: 'item1'},
+                        {itenName: 'item2'},
+                        {itenName: 'item3'}
+                    ]
+                },
+                {
+                    coverageName: 'coverage1',
+                    item: [
+                        {itenName: 'item1'},
+                        {itenName: 'item2'},
+                        {itenName: 'item3'}
+                    ]
+                },
+            ]
+        },
+        {
+            caluseName: '12',
+            coverage: [
+                {
+                    coverageName: 'coverage1',
+                    item: [
+                        {itenName: 'item1'},
+                        {itenName: 'item2'},
+                        {itenName: 'item3'}
+                    ]
+                },
+                {
+                    coverageName: 'coverage1',
+                    item: [
+                        {itenName: 'item1'},
+                        {itenName: 'item2'},
+                        {itenName: 'item3'}
+                    ]
+                },
+                {
+                    coverageName: 'coverage1',
+                    item: null},
+            ]
+        },
+    ]
+
+    // caluses.caluseName + caluses.coverage.coverageName + caluses.coverage.item.itenName
+    var arr =[];
+       
+
+        caluses.forEach(function(caluse,caluseIndex){
+            var a = caluse.caluseName;
+            // console.log(a);   //a 其实就是caluseName
+            var b = caluse.coverage;  //b 其实就是coverage
+            b.forEach(function(coverageV,coverageIndex){
+                var c = coverageV.coverageName   //c 其实就是coverageName
+                // console.log(c);
+                var d = coverageV.item;
+                // console.log(d);
+                if(d){
+                    d.forEach(function(itemV,itemIndex){
+                        var e = itemV.itenName;   //e 其实就是itenName
+                        // console.log(e);
+                        arr.push({
+                            a,c,e
+                        })
+                    });
+                } else {
+                    arr.push({
+                            a,c,e:null
+                        })
+                }
+            });
+        });
+        
+        console.log(arr)
+
+    </script>
+</body>
+</html>

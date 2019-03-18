@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+            看完，如果有信心的话，可以挑战一下自己。
+
+            http://www.w3cschool.cn/codecamp/list?ccid=8
+    </div>
+<script>
+// 1、翻转字符串
+// 例子（要求：先把字符串转化成数组，再借助数组的reverse方法翻转数组顺序，最后把数组转化成字符串) 
+    var str1 = "hello world !"
+    // split把字符串按照空格分割成数组，再用reverse翻转数组，然后用join把数组转化成字符串
+    str1 = str1.split('').reverse().join('');
+    console.log(str1);
+   
+// 2、递归函数的使用 :(1)计算一个整数的阶乘 n! = (n-1)! * n  
+// 递归函数：在函数的内部调用自身   回调函数：把函数当做参数传递到另一个函数内部去调用
+// 使用场景：递归用于快速排序     回调用于点击之后再加载
+    function factorialize(num){
+        if(num<1){
+            return 1;
+        } else {
+            return num * factorialize(num-1);
+        }
+    }
+    console.log(factorialize(5));
+// (2)打印数字1-10
+    var i = 10;
+    function test(){
+        var a = i--;
+        if(i<0) {
+            return;
+        }
+        test();
+        console.log(a);
+    }
+    test();
+// (3)实现1~n的累加
+    function add(num){
+        if(num <= 1){
+            return 1;
+        }
+        return num + add(num-1);
+    }
+    console.log(add(5));
+
+// 3、如果给定的字符串是回文，返回true，反之，返回false。
+    // 如果一个字符串忽略标点符号、大小写和空格，正着读和反着读一模一样，那么这个字符串就是palindrome(回文)。
+    // 注意需要去掉字符串多余的标点符号和空格，然后把字符串转化成小写来验证此字符串是否为回文。
+    // replace 替代，字符串中查找某个字符并替换，
+    // 第一个参数是被替换的字符，也可以是正则表达式，toLowerCase()把所有大写转成小写 
+    function palindrome(astr){
+        astr = astr.replace(/[^0-9a-zA-Z]/g,'').toLowerCase();
+        if( astr === astr.split('').reverse().join('')){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    console.log(palindrome("E,ye")); //true
+
+// 4、找到提供的句子中最长的单词，并计算它的长度。注意：函数的返回值应该是一个数字。
+// sort 排序 从大到小 b-a,从小到大 a-b
+    function findLongstWord(astr){
+        var bstr = astr.split(' ');
+            bstr = bstr.sort(function(a,b){
+            return b.length - a.length ;
+            });
+            console.log("最长单词为："+ bstr[0] +"，长度为："+ bstr[0].length );
+    }
+    findLongstWord("hi what are you doing know");
+
+// 5、确保字符串的每个单词首字母都大写，其余部分小写。  
+// substring() 方法用于提取字符串中介于两个指定下标之间的字符。第一个参数是开始位置，第二个是结束位置，取不到，
+// 都不允许负数,  toUpperCase()，小写转成大写
+    function titleCase(astr){
+        var bstr = astr.split(' ');  //["hi", "what", "are", "you", "doing", "know"]
+        for(var i=0;i<bstr.length;i++){
+            bstr[i] = bstr[i][0].toUpperCase() + bstr[i].substring(1,bstr[i].length);
+        }
+        return bstr.join(' ');
+    }    
+    console.log(titleCase("hi what are you doing know"));
+    
+// 6、右边大数组中包含了4个小数组，分别找到每个小数组中的最大值，然后把它们串联起来，形成一个新数组。
+    function max(arr){
+        var newArr = [];
+        arr.forEach(function(arrV,arrIndex){
+            var arrN = arrV.sort(function(a,b){
+                    return b-a;
+            });
+            newArr.push(arrN[0]);
+        });
+        console.log(newArr);
+    }
+    max([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+
+// 7、检查一个字符串(str)是否以指定的字符串(target)结尾。如果是，返回true;如果不是，返回false。
+    function confirmEnding(str,target){
+        var strN = str.replace(/\s+/g,'');
+        var bb = strN.substr(strN.length - target.length ,target.length);
+        if(bb == target){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    console.log(confirmEnding("abcdefg","fg"));
+//8、重复一个指定的字符串 num次，如果num是一个负数则返回一个空字符串。
+    function repeat(str,num){
+        if(num<0){
+            return ""
+        } else {
+            var astr = str ;
+            for(var i=0;i<num-1;i++){
+                str += astr ;
+            }
+            console.log(str);
+        }
+    }
+    repeat("abc",3);
+
+// 9、截断一个字符串！如果字符串的长度比指定的参数num数值大，则把多余的部分用...来表示。
+// 切记，插入到字符串尾部的三个点号也会计入字符串的长度。
+// 但是，如果指定的参数num小于或等于3，则添加的三个点号不会计入字符串的长度。
+function truncate(str,num){
+    var len=str.length;
+    var astr=str.slice(0,num-3);
+    var bstr=str.slice(0,num);
+    if(len>num){
+        if(num<=3){
+            return bstr+'...';
+        } else{
+            return astr+'...';
+        }
+    }   else {
+        return str;
+    }
+}
+console.log(truncate("hello world",3));
+
+// 10、把一个数组arr按照指定的数组大小size分割成若干个数组块。
+// 例如:chunk([1,2,3,4],2)=[[1,2],[3,4]];chunk([1,2,3,4,5],2)=[[1,2],[3,4],[5]];
+    function chunk(arr,size){
+        var newArr = [];
+        for(var i=0;i<arr.length;i+=size){
+            var barr = arr.slice(i,i+size);
+            newArr.push(barr);
+
+        }
+        console.log(newArr);
+    }
+    chunk([1,2,3,4,5,6],2);
+
+// 11、返回一个数组被截断n个元素后还剩余的元素，截断从索引0开始.splice返回被删除的元素
+    function slasher(arr,howMany){
+        var len = arr.length;
+        if(howMany === 0){
+            return arr ;
+        } else {
+            return arr.splice(howMany,len);
+        }
+    }
+    console.log(slasher([1,2,3,4,5],2));
+
+//12、如果数组第一个字符串元素包含了第二个字符串元素的所有字符，函数返回true。举例，["hello", "Hello"]
+// 应该返回true，因为在忽略大小写的情况下，第二个字符串的所有字符都可以在第一个字符串找到。
+// indexOf(),字符串方法，第一个参数是被查找值，第二个是开始查找索引位置，找到返回1，找不到返回-1
+    function mutation(arr){
+        astr = arr[0].toLowerCase();
+        bstr = arr[1].toLowerCase();
+        bstr = bstr.split(''); 
+        // console.log(bstr);
+        var newArr = [];
+        bstr.forEach(function(v,i){
+            newArr.push(astr.indexOf(v,0));
+        });
+        return newArr.every(function(v,i){
+                   return  v !== -1;
+                });
+    }
+    console.log(mutation(["hello", "hlelo"]));
+
+// 13、删除数组中的所有假值。在JavaScript中，假值有false、null、0、""、undefined 和 NaN。
+// underfined 没有实现
+    function bouncer(arr){
+        return arr.filter(function(val){
+            return val = !!val & val != undefined;
+        });
+    }
+    console.log(bouncer([1,2,false,null,3,0,"",1,NaN,undefined]));
+
+// 14、总结 !=, !==, !!val,!val的含义。=为赋值，{==为只判断值，===为值和类型都判断。输出均为boolean值}
+// (1)!=, !==
+        //== 和 != 比较若类型不同，先偿试转换类型，再作值比较，最后返回值比较结果 。
+        //而 === 和 !== 只有在相同类型下,才会比较其值。
+    function compareOne(){
+        var num = 1, str = "1", test = 1 ;
+        test !== num;       //false ,值和类型都相同，test不等于num则为false;
+        num != str;         //false,只判断值，值是相同的
+        num !== str;        //true,虽然值相同，但是类型不同
+    }
+// (2)!!val, !val  作用：第一种取反,可用于条件判断，第二种是操作布尔值。会把类型转换成布尔值
+    function compareTwo(){
+        var a = 1;
+        if(!a){
+            console.log("不是a，才执行if里的代码");
+        }
+        !a ; //false
+        !!a; //true
+        var b = false;
+        b === !b ;   //false
+        b == !!b;   //true 
+
+    }
+
+
+
+</script>
+
+
+</body>
+</html>
+   
